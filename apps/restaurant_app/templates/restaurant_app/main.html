@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<title>Restaurant Reviewer</title>
+	<meta charset="utf-8">
+</head>
+<body>
+	<h3>Welcome {{user.first_name}}</h3>
+	<a href="/logout"> Logout </a> | 
+	<a href="/restaurant_new"> Add a new restaurant </a>
+
+	<h3>Restaurants you have added</h3>
+	<table>
+		<thead>
+			<tr>
+				<th>Name</th>
+				<th>Type of cuisine</th>
+				<th>Price</th>
+				<th>Your Rating</th>
+				<th>Your Review</th>
+				<th>Number of reviews</th>
+				<th>Average rating</th>
+			</tr>
+		</thead>
+		{% for restaurant in restaurants %}
+			{% if user.id != restaurant.user.id %}
+				<tbody>
+					<tr>
+						<td>{{ restaurant.name }}</td>
+						<td>{{ restaurant.cuisine }}</td>
+						<td>{{ restaurant.price }}</td>
+						<td><a href="/add_review/{{restaurant.id}}">Review this Restaurant</a></td>
+					</tr>
+				</tbody>
+			{% endif %}
+		{% endfor %}
+	</table>
+
+	<h3>Restaurants you have reviewed</h3>
+		<table>
+			<thead>
+				<tr>
+					<th>Name</th>
+					<th>Type of Cuisine</th>
+					<th>Price</th>
+					<th>Your Rating</th>
+					<th>Your Review</th>
+				</tr>
+			</thead>
+		</table>
+
+</body>
+</html>
